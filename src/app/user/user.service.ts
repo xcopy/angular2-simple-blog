@@ -7,7 +7,7 @@ import { User } from './user.model';
 
 @Injectable()
 export class UserService {
-  constructor(private http: Http){}
+  constructor(private http: Http) {}
 
   getUsers(): Promise<User[]> {
     return this.http.get('https://jsonplaceholder.typicode.com/users')
@@ -18,7 +18,7 @@ export class UserService {
 
   getUser(id: number) {
     return this.getUsers()
-      .then(heroes => heroes.filter(hero => hero.id === id)[0]);
+      .then(users => users.filter(user => user.id === id)[0]);
   }
 
   private handleError(error:any) {
