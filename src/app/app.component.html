@@ -1,4 +1,12 @@
-<h1>{{title}}</h1>
-<div *ngFor="let user of users">
-  <div>{{user.name}}</div>
-</div>
+<md-sidenav-container>
+  <md-toolbar>{{title}}</md-toolbar>
+  <div class="app">
+    <md-card>
+      <md-list>
+        <md-list-item *ngFor="let user of users">
+          {{user.name}}
+        </md-list-item>
+      </md-list>
+    </md-card>
+  </div>
+</md-sidenav-container>
