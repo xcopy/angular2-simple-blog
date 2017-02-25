@@ -1,7 +1,4 @@
-import { Component, OnInit } from '@angular/core';
-import { User } from './user/user.model';
-import { Post } from './post/post.model';
-import { UserService } from './user/user.service';
+import { Component } from '@angular/core';
 import { PostService } from './post/post.service';
 
 @Component({
@@ -11,23 +8,9 @@ import { PostService } from './post/post.service';
     require('./app.component.scss')
   ],
   providers: [
-    UserService,
     PostService
   ]
 })
-export class AppComponent implements OnInit {
+export class AppComponent {
   title = 'Angular2 Simple Blog';
-  users: User[] = [];
-  posts: Post[] = [];
-
-  constructor(
-    private userService: UserService,
-    private postService: PostService
-  ) {}
-
-  ngOnInit() {
-    this.postService
-      .getPosts()
-      .then(posts => this.posts = posts);
-  }
 }
