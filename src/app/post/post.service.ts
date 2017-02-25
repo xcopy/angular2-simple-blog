@@ -14,4 +14,9 @@ export class PostService {
       .toPromise()
       .then(response => response.json());
   }
+
+  getPost(id: number) {
+    return this.getPosts()
+      .then(posts => posts.filter(post => post.id === id)[0]);
+  }
 }
