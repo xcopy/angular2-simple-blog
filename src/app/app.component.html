@@ -2,11 +2,12 @@
   <md-toolbar>{{title}}</md-toolbar>
   <div class="app">
     <md-card>
-      <md-list>
-        <md-list-item *ngFor="let user of users">
-          {{user.name}}
+      <md-nav-list>
+        <md-list-item *ngFor="let post of posts">
+          <a md-line>{{post.title}}</a>
+          <p md-line>{{post.body}}</p>
         </md-list-item>
-      </md-list>
+      </md-nav-list>
     </md-card>
   </div>
 </md-sidenav-container>
