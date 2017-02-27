@@ -6,6 +6,10 @@ export class Angular2SimpleBlogPage {
   }
 
   getParagraphText() {
-    return element(by.css('app-root h1')).getText();
+    return element(by.css('app-root md-toolbar')).getText();
+  }
+
+  getPostsContainer() {
+    return element(by.css('app-root post-list'));
   }
 }
