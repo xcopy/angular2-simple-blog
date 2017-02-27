@@ -1,5 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { Subscription } from 'rxjs';
+
 import { Post } from './post.model';
 import { PostService } from './post.service';
 
@@ -9,6 +11,7 @@ import { PostService } from './post.service';
 })
 export class PostDetailComponent implements OnInit {
   post: Post;
+  subscription: Subscription;
 
   constructor(
     private postService: PostService,
@@ -18,8 +21,12 @@ export class PostDetailComponent implements OnInit {
   ngOnInit() {
     let id = +this.route.snapshot.params['id'];
 
-    this.postService
+    this.subscription = this.postService
       .getPost(id)
-      .then(post => this.post = post)
+      .subscribe(post => this.post = post)
+  }
+
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
   }
 }

@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Subscription } from 'rxjs';
 
 import { Post } from './post.model';
 import { PostService } from './post.service';
@@ -10,19 +10,17 @@ import { PostService } from './post.service';
 })
 export class PostListComponent implements OnInit {
   posts: Post[] = [];
+  subscription: Subscription;
 
-  constructor(
-    private router: Router,
-    private postService: PostService
-  ) {}
+  constructor(private postService: PostService) {}
 
   ngOnInit() {
-    this.postService
+    this.subscription = this.postService
       .getPosts()
-      .then(posts => this.posts = posts);
+      .subscribe(posts => this.posts = posts);
   }
 
-  showPost(post: Post) {
-    this.router.navigate(['posts', {id: post.id}]);
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
   }
 }

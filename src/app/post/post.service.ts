@@ -1,22 +1,28 @@
 import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
-
-import 'rxjs/add/operator/toPromise';
+import { Observable } from 'rxjs';
+import 'rxjs/add/operator/map';
+import 'rxjs/add/observable/of';
 
 import { Post } from './post.model';
 
 @Injectable()
 export class PostService {
+  posts: Post[] = [];
+
   constructor(private http: Http) {}
 
-  getPosts(): Promise<Post[]> {
-    return this.http.get('https://jsonplaceholder.typicode.com/posts')
-      .toPromise()
-      .then(response => response.json());
+  getPosts(): Observable<Post[]> {
+    if (this.posts.length) {
+      return Observable.of(this.posts);
+    } else {
+      return this.http.get('https://jsonplaceholder.typicode.com/posts')
+        .map(response => this.posts = response.json());
+    }
   }
 
-  getPost(id: number) {
+  getPost(id: number): Observable<Post> {
     return this.getPosts()
-      .then(posts => posts.filter(post => post.id === id)[0]);
+      .map(posts => posts.filter(post => post.id === id)[0]);
   }
 }
