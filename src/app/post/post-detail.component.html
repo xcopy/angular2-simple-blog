@@ -1,4 +1,5 @@
 <md-card *ngIf="post">
-  <h1>{{post.title}}</h1>
-  <article>{{post.body}}</article>
+  <md-card-title>{{post.title}}</md-card-title>
+  <md-card-subtitle>{{post.author.name}}</md-card-subtitle>
+  <md-card-content>{{post.body}}</md-card-content>
 </md-card>

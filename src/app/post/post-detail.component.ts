@@ -4,6 +4,7 @@ import { Subscription } from 'rxjs';
 
 import { Post } from './post.model';
 import { PostService } from './post.service';
+import { UserService } from '../user/user.service';
 
 @Component({
   selector: 'post-detail',
@@ -15,6 +16,7 @@ export class PostDetailComponent implements OnInit {
 
   constructor(
     private postService: PostService,
+    private userService: UserService,
     private route: ActivatedRoute
   ) {}
 
@@ -23,7 +25,17 @@ export class PostDetailComponent implements OnInit {
 
     this.subscription = this.postService
       .getPost(id)
-      .subscribe(post => this.post = post)
+      .subscribe(post => {
+        let sub = this.userService
+          .getUser(post.userId)
+          .subscribe(user => post.author = user);
+
+        this.post = post;
+
+        setTimeout(() => {
+          sub.unsubscribe();
+        });
+      })
   }
 
   ngOnDestroy() {

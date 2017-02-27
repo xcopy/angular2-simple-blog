@@ -8,12 +8,12 @@ import { Post } from './post.model';
 
 @Injectable()
 export class PostService {
-  posts: Post[] = [];
+  posts: any;
 
   constructor(private http: Http) {}
 
   getPosts(): Observable<Post[]> {
-    if (this.posts.length) {
+    if (this.posts) {
       return Observable.of(this.posts);
     } else {
       return this.http.get('https://jsonplaceholder.typicode.com/posts')

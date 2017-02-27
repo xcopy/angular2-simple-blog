@@ -1,28 +1,28 @@
 import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
-
-import 'rxjs/add/operator/toPromise';
+import { Observable } from 'rxjs';
+import 'rxjs/add/operator/map';
+import 'rxjs/add/observable/of';
 
 import { User } from './user.model';
 
 @Injectable()
 export class UserService {
+  users: any;
+
   constructor(private http: Http) {}
 
-  getUsers(): Promise<User[]> {
-    return this.http.get('https://jsonplaceholder.typicode.com/users')
-      .toPromise()
-      .then(response => response.json())
-      .catch(this.handleError);
+  getUsers(): Observable<User[]> {
+    if (this.users) {
+      return Observable.of(this.users);
+    } else {
+      return this.http.get('https://jsonplaceholder.typicode.com/users')
+        .map(response => this.users = response.json());
+    }
   }
 
-  getUser(id: number) {
+  getUser(id: number): Observable<User> {
     return this.getUsers()
-      .then(users => users.filter(user => user.id === id)[0]);
-  }
-
-  private handleError(error:any) {
-    console.error('An error occurred', error);
-    return Promise.reject(error.message || error);
+      .map(users => users.filter(user => user.id === id)[0]);
   }
 }

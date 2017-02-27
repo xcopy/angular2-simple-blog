@@ -3,7 +3,7 @@
     <md-card-title>
       <a [routerLink]="['/posts', post.id]">{{post.title}}</a>
     </md-card-title>
-    <!-- <md-card-subtitle></md-card-subtitle> -->
+    <md-card-subtitle>by {{post.author.name}}</md-card-subtitle>
   </md-card-header>
   <md-card-content>
     <p>{{post.body}}</p>

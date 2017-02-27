@@ -1,12 +1,14 @@
 import { Component } from '@angular/core';
 import { PostService } from './post/post.service';
+import { UserService } from './user/user.service';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css'],
   providers: [
-    PostService
+    PostService,
+    UserService
   ]
 })
 export class AppComponent {
