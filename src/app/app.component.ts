@@ -4,9 +4,7 @@ import { PostService } from './post/post.service';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styles: [
-    require('./app.component.scss')
-  ],
+  styleUrls: ['./app.component.css'],
   providers: [
     PostService
   ]

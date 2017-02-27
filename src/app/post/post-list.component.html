@@ -1,6 +1,11 @@
-<md-nav-list>
-  <md-list-item *ngFor="let post of posts">
-    <a md-line [routerLink]="['/posts', post.id]">{{post.title}}</a>
-    <p md-line>{{post.body}}</p>
-  </md-list-item>
-</md-nav-list>
+<md-card *ngFor="let post of posts">
+  <md-card-header>
+    <md-card-title>
+      <a [routerLink]="['/posts', post.id]">{{post.title}}</a>
+    </md-card-title>
+    <!-- <md-card-subtitle></md-card-subtitle> -->
+  </md-card-header>
+  <md-card-content>
+    <p>{{post.body}}</p>
+  </md-card-content>
+</md-card>
