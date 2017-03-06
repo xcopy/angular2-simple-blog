@@ -1,7 +1,7 @@
 import { TestBed } from '@angular/core/testing';
 import { APP_BASE_HREF } from '@angular/common';
 import { MaterialModule } from '@angular/material';
-import { RouterTestingModule } from "@angular/router/testing";
+import { RouterTestingModule } from '@angular/router/testing';
 import { AppRoutingModule } from './app-routing.module';
 
 import { AppComponent } from './app.component';

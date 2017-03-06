@@ -1,16 +1,16 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Subscription } from 'rxjs';
+import { Subscription } from 'rxjs/Subscription';
 
 import { Post } from './post.model';
 import { PostService } from './post.service';
 import { UserService } from '../user/user.service';
 
 @Component({
-  selector: 'post-detail',
+  selector: 'app-post-detail',
   templateUrl: './post-detail.component.html'
 })
-export class PostDetailComponent implements OnInit {
+export class PostDetailComponent implements OnInit, OnDestroy {
   post: Post;
   subscription: Subscription;
 
@@ -21,12 +21,12 @@ export class PostDetailComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    let id = +this.route.snapshot.params['id'];
+    const id = +this.route.snapshot.params['id'];
 
     this.subscription = this.postService
       .getPost(id)
       .subscribe(post => {
-        let sub = this.userService
+        const sub = this.userService
           .getUser(post.userId)
           .subscribe(user => post.author = user);
 
@@ -35,7 +35,7 @@ export class PostDetailComponent implements OnInit {
         setTimeout(() => {
           sub.unsubscribe();
         });
-      })
+      });
   }
 
   ngOnDestroy() {

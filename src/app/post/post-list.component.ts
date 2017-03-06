@@ -1,5 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { Subscription, Observable } from 'rxjs';
+import { Subscription} from 'rxjs/Subscription';
+import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/observable/forkJoin';
 
 import { Post } from './post.model';
@@ -7,10 +8,10 @@ import { PostService } from './post.service';
 import { UserService } from '../user/user.service';
 
 @Component({
-  selector: 'post-list',
+  selector: 'app-post-list',
   templateUrl: './post-list.component.html'
 })
-export class PostListComponent implements OnInit {
+export class PostListComponent implements OnInit, OnDestroy {
   posts: Post[] = [];
   subscription: Subscription;
 
@@ -29,7 +30,7 @@ export class PostListComponent implements OnInit {
       this.posts.pop();
 
       this.posts.forEach((post: Post) => {
-        let sub = this.userService
+        const sub = this.userService
           .getUser(post.userId)
           .subscribe(user => post.author = user);
 
